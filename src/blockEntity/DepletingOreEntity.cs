@@ -64,7 +64,7 @@ namespace depletingores.src.blockEntity
             CurrentQuantity--;
 
             //Replace destroyed block if quantity is above zero. (Alternative: The block should be destroyed.)
-            if (CurrentQuantity <= 0)
+            if (CurrentQuantity > 0)
             {
                 //TODO|WARNING: This is not preventing the blocks default behavior of getting destroyed and therefore deleting this entity..
                 _world.BlockAccessor.ExchangeBlock(Block.Id, this.Pos);
