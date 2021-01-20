@@ -1,0 +1,22 @@
+{
+  "blockmaterial": "stone",
+  "code": "depletingore",
+  "creativeinventory": {
+    "general": [
+      "*"
+    ]
+  },
+  "drawtype": "cube",
+  "drops": [],
+  "entityclass": "depletingore",
+  "resistance": 3.5,
+  "sounds": {
+    "place": "game:block/anvil",
+    "walk": "game:walk/stone"
+  },
+  "textures": {
+    "all": {
+      "base": "block/mygoldtexture"
+    }
+  }
+}
