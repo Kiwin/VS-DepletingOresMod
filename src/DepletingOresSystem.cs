@@ -1,4 +1,5 @@
-﻿using depletingores.src.blockEntity;
+﻿using depletingores.src.block;
+using depletingores.src.blockEntity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace depletingores.src
         public override void Start(ICoreAPI api)
         {
             base.Start(api);
+            api.RegisterBlockClass("depletingore", typeof(DepletingOreBlock));
             api.RegisterBlockEntityClass("depletingore", typeof(DepletingOreEntity));
         }
 
