@@ -1,6 +1,8 @@
 {
-  "blockmaterial": "stone",
   "code": "depletingore",
+  "class": "depletingore",
+  "entityclass": "depletingore",
+  "blockmaterial": "stone",
   "creativeinventory": {
     "general": [
       "*"
@@ -8,7 +10,6 @@
   },
   "drawtype": "cube",
   "drops": [],
-  "entityclass": "depletingore",
   "resistance": 3.5,
   "sounds": {
     "place": "game:block/anvil",

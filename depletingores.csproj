@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\blockEntity\DepletingOreEntity.cs" />
+    <Compile Include="src\block\DepletingOreBlock.cs" />
     <Compile Include="src\DepletingOresSystem.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
