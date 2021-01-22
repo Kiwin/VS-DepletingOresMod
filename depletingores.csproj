@@ -68,11 +68,13 @@
   <ItemGroup />
   <ItemGroup>
     <None Include="assets\depletingores\blocktypes\depletingore.json" />
+    <None Include="assets\depletingores\patches\ore-graded.json" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\blockEntity\DepletingOreEntity.cs" />
     <Compile Include="src\block\DepletingOreBlock.cs" />
     <Compile Include="src\DepletingOresSystem.cs" />
+    <Compile Include="src\ModContext.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

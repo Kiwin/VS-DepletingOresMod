@@ -32,7 +32,7 @@ namespace depletingores.src.blockEntity
         // e.i. Block type, Position in cluster(At egde vs. Towards center).
         private int GetBaseQuantity()
         {
-            return 10;
+            return 5;
         }
     }
 
