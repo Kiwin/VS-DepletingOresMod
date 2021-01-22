@@ -11,48 +11,55 @@ using Vintagestory.GameContent;
 
 namespace depletingores.src.block
 {
-    // TODO: Make class extend BlockOre instead of Block.
-    public class DepletingOreBlock : Block
+    public class DepletingOreBlock : BlockOre
     {
-        public override void OnBlockBroken(IWorldAccessor world, BlockPos pos, IPlayer byPlayer, float dropQuantityMultiplier = 1)
+        private DepletingOreEntity GetBlockEntity(IWorldAccessor world, BlockPos pos)
         {
             DepletingOreEntity entity = (DepletingOreEntity)world.BlockAccessor.GetBlockEntity(pos);
-
-            if (entity.CurrentQuantity != 0)
+            if (entity == null)
             {
-                //Generate and drop loot
-                var itemToDrop = GenerateDropItem(entity.QuantityPercentageRemaining, world);
-                var itemStackDrop = new ItemStack(itemToDrop);
-                world.SpawnItemEntity(itemStackDrop, pos.ToVec3d());
-
-                entity.CurrentQuantity--;
+                //A DepletingOreBlock should always have an DepletingOreEntity, therefore we create a new one.
+                world.BlockAccessor.SpawnBlockEntity(ModContext.ClassNames.DepletingOreEntity, pos);
+                entity = (DepletingOreEntity)world.BlockAccessor.GetBlockEntity(pos);
             }
-            else
-            {
-                //Allow the block to get destroyed.
-                base.OnBlockBroken(world, pos, byPlayer, dropQuantityMultiplier);
-            }
-
+            return entity;
         }
 
-        // TODO: Generate item drops based on block type. 
-        // e.g. ore-rich-bismuthinite-andesite -> 100% = rich-bismuthinite, 50% = medium-bismuthinite, 25% = poor-bismuthinite.
-
-        private static List<Item> lootTable;
-        public Item GenerateDropItem(double quantityPercentageRemaining, IWorldAccessor world)
+        public override void OnBlockBroken(IWorldAccessor world, BlockPos pos, IPlayer byPlayer, float dropQuantityMultiplier = 1)
         {
-            if (lootTable == null)
+            //If player is in creative mode.
+            if (world.Side == EnumAppSide.Server && (byPlayer == null || byPlayer.WorldData.CurrentGameMode != EnumGameMode.Creative))
             {
-                lootTable = new List<Item> {
-                    world.GetItem(new AssetLocation("pickaxe-copper")),
-                    world.GetItem(new AssetLocation("pickaxe-iron")),
-                    world.GetItem(new AssetLocation("pickaxe-gold"))
-                };
+                //Destroy the block.
+                world.BlockAccessor.SetBlock(0, pos);
+                return;
             }
 
-            // TODO: Fix weird drop distribution.
-            int index = (int)Math.Round((lootTable.Count - 1) * quantityPercentageRemaining);
-            return lootTable[index];
+            world.PlaySoundAt(Sounds.GetBreakSound(byPlayer), pos.X, pos.Y, pos.Z, byPlayer);
+
+            var entity = GetBlockEntity(world, pos);
+
+            //Generate item drops.
+            // TODO: Generate drops based on type and depletion progress, instead of actuel ore drops. 
+            ItemStack[] drops = GetDrops(world, pos, byPlayer, dropQuantityMultiplier);
+
+            if (drops != null)
+            {
+                for (int i = 0; i < drops.Length; i++)
+                {
+                    world.SpawnItemEntity(drops[i], new Vec3d(pos.X + 0.5, pos.Y + 0.5, pos.Z + 0.5), null);
+                }
+            }
+
+            entity.CurrentQuantity--;
+
+            //Decide if block should break.
+            if (entity.CurrentQuantity == 0)
+            {
+                //Destroy the block.
+                world.BlockAccessor.SetBlock(0, pos);
+                return;
+            }
         }
     }
 }

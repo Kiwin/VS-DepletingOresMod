@@ -1,7 +1,7 @@
 {
   "code": "depletingore",
-  "class": "depletingore",
-  "entityclass": "depletingore",
+  "class": "DepletingOreBlock",
+  "entityclass": "DepletingOreEntity",
   "blockmaterial": "stone",
   "creativeinventory": {
     "general": [

@@ -18,8 +18,8 @@ namespace depletingores.src
         public override void Start(ICoreAPI api)
         {
             base.Start(api);
-            api.RegisterBlockClass("depletingore", typeof(DepletingOreBlock));
-            api.RegisterBlockEntityClass("depletingore", typeof(DepletingOreEntity));
+            api.RegisterBlockClass(ModContext.ClassNames.DepletingOreBlock, typeof(DepletingOreBlock));
+            api.RegisterBlockEntityClass(ModContext.ClassNames.DepletingOreEntity, typeof(DepletingOreEntity));
         }
 
     }
