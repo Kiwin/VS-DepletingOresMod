@@ -2,7 +2,7 @@
 
 ## Resume
 
-A vintage story mod that implements ore blocks that have an infinite(or specified) yield that deplete in quality as it is mined.
+A mod for vintage story that implements ore blocks with infinite(or specified) yield that deplete in quality as it is mined.
 
 ### Completed Features:
 - [x] Ore blocks with extended yield.
