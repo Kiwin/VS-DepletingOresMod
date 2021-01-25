@@ -29,7 +29,7 @@ namespace depletingores.src.blockEntity
         }
 
         // TODO: Choose base quantity based on more factors. 
-        // e.i. Block type, Position in cluster(At egde vs. Towards center).
+        // e.i. Block type, Position in cluster(At egde vs. Towards center), Block y position.
         private int GetBaseQuantity()
         {
             return 5;
