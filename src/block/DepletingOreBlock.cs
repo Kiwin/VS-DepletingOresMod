@@ -28,7 +28,7 @@ namespace depletingores.src.block
         public override void OnBlockBroken(IWorldAccessor world, BlockPos pos, IPlayer byPlayer, float dropQuantityMultiplier = 1)
         {
             //If player is in creative mode.
-            if (world.Side == EnumAppSide.Server && (byPlayer == null || byPlayer.WorldData.CurrentGameMode != EnumGameMode.Creative))
+            if (world.Side == EnumAppSide.Server && (byPlayer == null || byPlayer.WorldData.CurrentGameMode == EnumGameMode.Creative))
             {
                 //Destroy the block.
                 world.BlockAccessor.SetBlock(0, pos);
@@ -54,6 +54,7 @@ namespace depletingores.src.block
             entity.CurrentQuantity--;
 
             //Decide if block should break.
+            // HACK: Note that any ore with less than 0 in quantity will have infinity yield.
             if (entity.CurrentQuantity == 0)
             {
                 //Destroy the block.

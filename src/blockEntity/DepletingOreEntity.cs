@@ -24,15 +24,24 @@ namespace depletingores.src.blockEntity
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
-            BaseQuantity = GetBaseQuantity();
+            BaseQuantity = GetBaseQuantity(api.World);
             CurrentQuantity = BaseQuantity;
         }
 
         // TODO: Choose base quantity based on more factors. 
         // e.i. Block type, Position in cluster(At egde vs. Towards center).
-        private int GetBaseQuantity()
+        private int GetBaseQuantity(IWorldAccessor world)
         {
-            return 5;
+            double x = Pos.Y;
+            double s = world.SeaLevel;
+            const double A = 1; // Quantity at sea-level.
+            const double B = 16; // Y-position offset.
+            const double C = 16; // Amount of blocks downward per quantity increment.
+            const double MINIMUM_QUANTITY = 1;
+
+            double q = Math.Round((-x + s + B) / C + A);
+            
+            return (int)Math.Max(q, MINIMUM_QUANTITY);
         }
     }
 
