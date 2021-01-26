@@ -37,9 +37,10 @@ namespace depletingores.src.blockEntity
             const double A = 1; // Quantity at sea-level.
             const double B = 16; // Y-position offset.
             const double C = 16; // Amount of blocks downward per quantity increment.
+            const double D = 2; // Quantity to increment by.
             const double MINIMUM_QUANTITY = 1;
 
-            double q = Math.Round((-x + s + B) / C + A);
+            double q = Math.Round((-x + s + B) / C + A) * D;
             
             return (int)Math.Max(q, MINIMUM_QUANTITY);
         }
