@@ -34,7 +34,7 @@ namespace depletingores.src.blockEntity
         {
             double x = Pos.Y;
             double s = world.SeaLevel;
-            const double A = 1; // Quantity at see level.
+            const double A = 1; // Quantity at sea-level.
             const double B = 16; // Y-position offset.
             const double C = 16; // Amount of blocks downward per quantity increment.
             const double MINIMUM_QUANTITY = 1;
