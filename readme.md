@@ -1,4 +1,4 @@
-# Depleting ore mod
+# Depleting Ores Mod
 
 ## Resume
 
