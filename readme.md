@@ -8,4 +8,4 @@ A mod for vintage story that implements ore blocks with infinite(or specified) y
 - [x] Ore blocks with extended yield.
 - [x] World generation of depleting ores. 
 - [ ] Depleting quality of yield.
-- [ ] Ore yield quantity control options.
+- [ ] Ore yield quantity options via config.
