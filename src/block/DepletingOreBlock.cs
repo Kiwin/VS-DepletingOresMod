@@ -58,7 +58,7 @@ namespace depletingores.src.block
             }
             
             // Decide if block should break.
-            // HACK: Note that any ore with less than 0 in quantity will have infinity yield.
+            // HACK: Note that any ore with less than 0 in quantity will have infinite yield.
             if (entity.CurrentQuantity == 0)
             {
                 // Destroy the block.
