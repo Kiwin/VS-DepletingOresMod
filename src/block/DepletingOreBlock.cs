@@ -38,7 +38,9 @@ namespace depletingores.src.block
             world.PlaySoundAt(Sounds.GetBreakSound(byPlayer), pos.X, pos.Y, pos.Z, byPlayer);
 
             var entity = GetBlockEntity(world, pos);
-
+            
+            dropQuantityMultiplier *= byPlayer?.Entity.Stats.GetBlended("oreDropRate") ?? 1;
+            
             // Generate item drops.
             // TODO: Generate drops based on type and depletion progress, instead of actuel ore drops. 
             ItemStack[] drops = GetDrops(world, pos, byPlayer, dropQuantityMultiplier);
