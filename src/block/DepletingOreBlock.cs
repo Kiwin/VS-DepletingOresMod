@@ -18,7 +18,7 @@ namespace depletingores.src.block
             DepletingOreEntity entity = (DepletingOreEntity)world.BlockAccessor.GetBlockEntity(pos);
             if (entity == null)
             {
-                //A DepletingOreBlock should always have an DepletingOreEntity, therefore we create a new one.
+                // A DepletingOreBlock should always have an DepletingOreEntity, therefore we create a new one.
                 world.BlockAccessor.SpawnBlockEntity(ModContext.ClassNames.DepletingOreEntity, pos);
                 entity = (DepletingOreEntity)world.BlockAccessor.GetBlockEntity(pos);
             }
@@ -27,10 +27,10 @@ namespace depletingores.src.block
 
         public override void OnBlockBroken(IWorldAccessor world, BlockPos pos, IPlayer byPlayer, float dropQuantityMultiplier = 1)
         {
-            //If player is in creative mode.
+            // If player is in creative mode.
             if (world.Side == EnumAppSide.Server && (byPlayer == null || byPlayer.WorldData.CurrentGameMode == EnumGameMode.Creative))
             {
-                //Destroy the block.
+                // Destroy the block.
                 world.BlockAccessor.SetBlock(0, pos);
                 return;
             }
@@ -39,7 +39,7 @@ namespace depletingores.src.block
 
             var entity = GetBlockEntity(world, pos);
 
-            //Generate item drops.
+            // Generate item drops.
             // TODO: Generate drops based on type and depletion progress, instead of actuel ore drops. 
             ItemStack[] drops = GetDrops(world, pos, byPlayer, dropQuantityMultiplier);
 
@@ -50,14 +50,16 @@ namespace depletingores.src.block
                     world.SpawnItemEntity(drops[i], new Vec3d(pos.X + 0.5, pos.Y + 0.5, pos.Z + 0.5), null);
                 }
             }
-
-            entity.CurrentQuantity--;
-
-            //Decide if block should break.
+            
+            if(entity.CurrentQuantity > 0){
+                entity.CurrentQuantity--;
+            }
+            
+            // Decide if block should break.
             // HACK: Note that any ore with less than 0 in quantity will have infinity yield.
             if (entity.CurrentQuantity == 0)
             {
-                //Destroy the block.
+                // Destroy the block.
                 world.BlockAccessor.SetBlock(0, pos);
                 return;
             }
