@@ -1,7 +1,5 @@
 # Depleting Ores Mod
 
-## Resume
-
 A mod for vintage story that implements ore blocks with infinite(or specified) yield that deplete in quality as it is mined.
 
 ### Completed Features:
